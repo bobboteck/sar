@@ -56,8 +56,7 @@ void InitApp(void)
     PTPERH = 0x01;
     PTPERL = 0xff;
     // PWM Control
-    //PWMCON0 = 0b01000000;	// PWM1:PWM5 Abilitati
-    PWMCON0 = 0b00110000; // PWM0:PWM4 Abilitati
+    PWMCON0 = 0b00110000; // PWM0:PWM3 Abilitati
     PWMCON1 = 0b11110000; // 1:16 postscaler, updates abilitati, override asincrono
     DTCON = 0x00; // dead time 0ns
     // Output Override

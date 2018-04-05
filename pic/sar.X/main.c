@@ -40,21 +40,21 @@ void main(void)
     {
         if(ENCODER_SX==1)
         {
-            LED_ROSSO=0;
+            LED_ROSSO=1;
         }
         else
         {
-            LED_ROSSO=1;
+            LED_ROSSO=0;
         }
 
         
         if(ENCODER_DX==1)
         {
-            LED_VERDE=0;
+            LED_VERDE=1;
         }
         else
         {
-            LED_VERDE=1;    
+            LED_VERDE=0;    
         }
         
         //__delay_ms(1000);
