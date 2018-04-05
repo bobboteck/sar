@@ -14,3 +14,6 @@
 #/Code/rSensorUS.X/nbproject/Makefile-variables.mk
 #/Code/rSensorUS.X/nbproject/Package-default.bash
 #/Code/rSensorUS.X/nbproject/private/configurations.xml
+/pic/sar.X/nbproject/private/
+/pic/sar.X/build/default/
+/pic/sar.X/dist/default/
