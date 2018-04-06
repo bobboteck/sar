@@ -20,16 +20,20 @@
 #define LED_GIALLO  LATEbits.LATE1
 #define LED_VERDE   LATEbits.LATE0
 
-/* Encoder Destro collegato a RB5 */
-#define ENCODER_SX  PORTBbits.RB4
-/* Encoder Destro collegato a RB5 */
-#define ENCODER_DX  PORTBbits.RB5
+/* Encoder Sinistro collegato a RB5 */
+#define ENCODER_SX  PORTBbits.RB5
+/* Encoder Destro collegato a RB4 */
+#define ENCODER_DX  PORTBbits.RB4
 
 #define TMR0_VALUE      241
 
 /******************************************************************************/
 /* User Function Prototypes                                                   */
 /******************************************************************************/
+
+unsigned int counter_led=0;
+unsigned int encoderDxCounter=0;
+unsigned int encoderSxCounter=0;
 
 /* TODO User level functions prototypes (i.e. InitApp) go here */
 

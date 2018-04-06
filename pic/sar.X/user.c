@@ -84,11 +84,16 @@ void InitApp(void)
     INTCONbits.GIEL=0;      // Disabilita tutti gli Interrupt (Low)
     INTCONbits.TMR0IF=0;    // Resetta il Flag dell'int del Timer0, va resettato sempre a mano
 	PIR1bits.ADIF=0;		// Resetta il Flag dell'int del ADC, va resettato sempre a mano
+    INTCONbits.RBIF=0;      // Resetta il Flag dell'int delle RB on change, va resettato sempre a mano
+    
     INTCON2bits.TMR0IP=1;   // L'int del Timer0 è definito di High priority
+    INTCON2bits.RBIP=1;     // L'int su RB è definito di High priority
+    
     IPR1bits.ADIP=0;        // Int ADC definito Low priority
 
     /* Enable interrupts */
     INTCONbits.TMR0IE=1;    // Abilita l'interrupt sul Timer0
+    INTCONbits.RBIE=1;      // Abilita l'interrupt su RB
     PIE1bits.ADIE=1;        // Abilita l'interrupt sul ADC
     INTCONbits.GIEH=1;      // Abilita tutti gli Interrupt (High)
     INTCONbits.GIEL=1;      // Abilita tutti gli Interrupt (Low)
