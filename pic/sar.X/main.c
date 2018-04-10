@@ -35,37 +35,20 @@ void main(void)
     
     while(1)
     {
-//        if(ENCODER_SX==1)
-//        {
-//            LED_ROSSO=1;
-//        }
-//        else
-//        {
-//            LED_ROSSO=0;
-//        }
-//        
-//        if(ENCODER_DX==1)
-//        {
-//            LED_VERDE=1;
-//        }
-//        else
-//        {
-//            LED_VERDE=0;    
-//        }
-        
-        if(encoderSxCounter>5)
+        if(encoderSxCounter<=20)
         {
-//            if(LED_ROSSO==0)
-//            {
-//                LED_ROSSO=1;
-//            }
-//            else
-//            {
-//                LED_ROSSO=0;
-//            }
-            LED_ROSSO=!LED_ROSSO;
+            LED_ROSSO=0;
+        }
+        if(encoderSxCounter>20 && encoderSxCounter<40)
+        {
+            LED_ROSSO=1;
+        }
+        if(encoderSxCounter>=40)
+        {
             encoderSxCounter=0;
         }
+        
+        
         
         if(encoderDxCounter>5)
         {

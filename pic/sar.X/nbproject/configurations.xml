@@ -6,6 +6,7 @@
                    projectFiles="true">
       <itemPath>system.h</itemPath>
       <itemPath>user.h</itemPath>
+      <itemPath>dterminal.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -19,6 +20,7 @@
       <itemPath>system.c</itemPath>
       <itemPath>user.c</itemPath>
       <itemPath>interrupts.c</itemPath>
+      <itemPath>dterminal.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
