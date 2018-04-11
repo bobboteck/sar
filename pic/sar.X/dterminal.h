@@ -1,12 +1,12 @@
-/* --------------------------------------------------------------------------
+/* ----------------------------------------------------------------------------
  * 
  * 	Libreria per la gestione della scheda terminale con:
  *  - Display a matrice di punti su 2 righe
- *  - 3 Led (possibilità di un 4° Led)
+ *  - 3 Led (possibilitÃ  di un quarto Led)
  *  - 4 pulsanti
  *  Versione per il compilatore XC8 
  * 
- *	File  : dterminal.h	Ver.: 0.0.1	- Data creazione: 09/04/2018
+ *	File  : dterminal.h	Ver.: 1.0.0	- Data creazione: 09/04/2018
  *		
  *	Autore: Roberto D'Amico (@bobboteck)
  *
@@ -23,24 +23,18 @@
 **	- settare le porte di I/O (TRISx) in funzione delle porte
 **	  che state usando;
 **	- modificare le impostazioni di lcd_init() se volete usare il display
-**	  in modalità diversa da quella di default;
+**	  in modalitï¿½ diversa da quella di default;
 **	- modificare le DEFINE (in questo file) LCD_RS, LCD_EN e 
 **	  LCD_PORT_DATA, se volete usare porte del PIC diverse da quelle di
 **	  default;
-**	- la funzione lcd_write() usa i 4 bit più significativi della porta
+**	- la funzione lcd_write() usa i 4 bit piï¿½ significativi della porta
 **	  indicata da LCD_PORT_DATA.
 **
 **      NOTE
 **	
-**	L configurazione è scritta per funzionare con la RoboBoard 2.1 e il
+**	La configurazione Ã¨ scritta per funzionare con la RoboBoard 2.1 e il
 **	display collgato sula porta D
 **
-**	Novità
-**	
-**	- Aggiunta la funzione lcd_put_uchar		(1.2)
-**	- Aggiunta la funzione lcd_put_uint			(1.2)
-**	- Cambiate le chiamate al delay per il C18	(1.2.1)
-**	
 ** ----------------------------------------------------------------------- */
 
 
@@ -57,15 +51,15 @@
 
 /* ========================================================================================= */
 /* Modificare questi paramentri per cambiare le porte utilizzate per la gestione del display */
-/* !!!ATTENZIONE!!! - Per i dati vengono utilizzati i 4 bit più significativi della porta    */
+/* !!!ATTENZIONE!!! - Per i dati vengono utilizzati i 4 bit piï¿½ significativi della porta    */
 /* indicata da LCD_PORT_DATA								     							 */
 /* ----------------------------------------------------------------------------------------- */
 #define LCD_RS			PORTDbits.RD0	// Register select
 #define LCD_EN			PORTDbits.RD1	// Enable
-#define	LCD_PORT_DATA	PORTD	// Porta di connesione per le linee Data
+#define	LCD_PORT_DATA	PORTD	        // Porta di connesione per le linee Data
 
-#define	LCD_CMD			0		// Definisce modalità Comando
-#define	LCD_DATA		1		// Definisce modalità Data 
+#define	LCD_CMD			0		        // Definisce modalitï¿½ Comando
+#define	LCD_DATA		1		        // Definisce modalitï¿½ Data 
 /* ========================================================================================= */
 
 /* ========================================================================================= */
@@ -95,14 +89,14 @@
 // ------------------------
 #define LCD_CMD_DC			0b00001000	// Comando per Display On/Off Controll da mettere in OR con i seguenti
 
-#define LCD_DC_DISPLAY_ON	0b00000100	// Imposta la modalità Display On
-#define LCD_DC_DISPLAY_OFF	0b00000000	// Imposta la modalità Display Off, i dati visalizzati restano comunque in memoria
+#define LCD_DC_DISPLAY_ON	0b00000100	// Imposta la modalitï¿½ Display On
+#define LCD_DC_DISPLAY_OFF	0b00000000	// Imposta la modalitï¿½ Display Off, i dati visalizzati restano comunque in memoria
 
-#define LCD_DC_CURSOR_ON	0b00000010	// Imposta la modalità Cursore On
-#define LCD_DC_CURSOR_OFF	0b00000000	// Imposta la modalità Cursore Off
+#define LCD_DC_CURSOR_ON	0b00000010	// Imposta la modalitï¿½ Cursore On
+#define LCD_DC_CURSOR_OFF	0b00000000	// Imposta la modalitï¿½ Cursore Off
 
-#define LCD_DC_CURBLINK_ON	0b00000001	// Imposta la modalità Cursore lampeggiante
-#define LCD_DC_CURBLINK_OFF	0b00000000	// Imposta la modalità Cursore non lampeggiante
+#define LCD_DC_CURBLINK_ON	0b00000001	// Imposta la modalitï¿½ Cursore lampeggiante
+#define LCD_DC_CURBLINK_OFF	0b00000000	// Imposta la modalitï¿½ Cursore non lampeggiante
 /* ----------------------------------------------------------------------------------------- */
 
 // ------------------------
@@ -122,11 +116,11 @@
 // -------------
 #define LCD_CMD_FS		0b00100000	// Comando per la definizione del modo di funzionamento
 
-#define LCD_FS_DL8		0b00010000	// Imposta la modalità di comunicazione dati a 8 bit
-#define LCD_FS_DL4		0b00000000	// Imposta la modalità di comunicazione dati a 4 bit
+#define LCD_FS_DL8		0b00010000	// Imposta la modalitï¿½ di comunicazione dati a 8 bit
+#define LCD_FS_DL4		0b00000000	// Imposta la modalitï¿½ di comunicazione dati a 4 bit
 
-#define LCD_FS_NRM		0b00001000	// Imposta la modalità a + righe
-#define LCD_FS_NRS		0b00000000	// Imposta la modalità a 1 riga
+#define LCD_FS_NRM		0b00001000	// Imposta la modalitï¿½ a + righe
+#define LCD_FS_NRS		0b00000000	// Imposta la modalitï¿½ a 1 riga
 
 #define LCD_FS_F5X10	0b00000100	// Imposta la dimensione Font 5x10
 #define LCD_FS_F5X7		0b00000000	// Imposta la dimensione Font 5x7
@@ -137,6 +131,48 @@
 /* User Function Prototypes                                                   */
 /******************************************************************************/
 
+/* Inizializza il display */
+void lcd_init(void);
+/* Canella il display e posiziona il cursore alla posizione home */
+void lcd_clear(void);
+/* Posiziona il cursore alla posizione home */
+void lcd_home(void);
+/******************************************************************************
+ * Posiziona il cursore alla riga e colonna indicata dai parametri
+ *
+ * @param row: indica la righa a cui posizionare il cursore (indice da 0)
+ * @param col: indica la colonna a cui posizionare il	cursore (indice da 0)
+******************************************************************************/
+void lcd_pos_cur(unsigned char row, unsigned char col);
+/******************************************************************************
+ * Scrive un carattere sul display
+ *
+ * @param c: carattere da visualizzare sul display
+******************************************************************************/
+void lcd_putch(unsigned char c);
+/******************************************************************************
+ * Scrive una stringa di caratteri sul display
+ *
+ * @param s: stringa da visualizzare sul display
+******************************************************************************/
+void lcd_puts(const char *s);
+/******************************************************************************
+ * Scrive sul display il numero passato come parametro, posizionandolo nella 
+ * possizione indicata dagli altri due parametri
+ * 
+ * @param numero: numero da visualizzare sul display
+ * @param riga: indica la righa a cui posizionare il cursore (indice da 0)
+ * @param colonna: indica la colonna a cui posizionare il cursore (indice da 0)
+******************************************************************************/
+void lcd_put_uchar(unsigned char numero, unsigned char riga, unsigned char colonna);
+/******************************************************************************
+ * Scrive sul display il numero passato come parametro, posizionandolo nella 
+ * possizione indicata dagli altri due parametri
+ * 
+ * @param numero: numero da visualizzare sul display
+ * @param riga: indica la righa a cui posizionare il cursore (indice da 0)
+ * @param colonna: indica la colonna a cui posizionare il cursore (indice da 0)
+******************************************************************************/
+void lcd_put_uint(unsigned int numero, unsigned char riga, unsigned char colonna);
 
 #endif	/* DTERMINAL_H */
-

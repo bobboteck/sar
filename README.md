@@ -1,2 +1,2 @@
-# sar
+# SAR
 SAR - Simple Autonomous Robot

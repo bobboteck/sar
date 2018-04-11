@@ -150,7 +150,7 @@ void lcd_put_uchar(unsigned char numero, unsigned char riga, unsigned char colon
 		lcd_putch('0');
 	numero-=(numero/10)*10;
 
-	/***** Estrazione unità *****/
+	/***** Estrazione unitï¿½ *****/
 	if(numero!=0)
 		lcd_putch('0'+numero);
 	else
@@ -206,7 +206,7 @@ void lcd_put_uint(unsigned int numero, unsigned char riga, unsigned char colonna
 }
 
 /**************************************************************************
-*** Inizializza il display in modalita 4 bit il cursore è OFF, per	  	***
+*** Inizializza il display in modalita 4 bit il cursore ï¿½ OFF, per	  	***
 *** attivare il cursore cambiare il commento				  			***
 **************************************************************************/
 void lcd_init(void)

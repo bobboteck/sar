@@ -11,8 +11,9 @@
 #include <stdint.h>        /* For uint8_t definition */
 #include <stdbool.h>       /* For true/false definition */
 
-#include "system.h"        /* System funct/params, like osc/peripheral config */
-#include "user.h"          /* User funct/params, such as InitApp */
+#include "system.h"         /* System funct/params, like osc/peripheral config */
+#include "user.h"           /* User funct/params, such as InitApp */
+#include "dterminal.h"      /*  */
 /******************************************************************************/
 /* User Global Variable Declaration                                           */
 /******************************************************************************/
@@ -27,10 +28,13 @@
 
 void main(void)
 {
+    unsigned int encoderDxCurrentValue=0;
+
     /* Configure the oscillator for the device */
     ConfigureOscillator();
     /* Initialize I/O and Peripherals for application */
     InitApp();
+    lcd_init();
     StartTimer0();
     
     while(1)
@@ -49,32 +53,40 @@ void main(void)
         }
         
         
-        
-        if(encoderDxCounter>5)
+        // Il led verde lampeggia ogni quarto di giro della ruota destra
+        if(encoderDxCounter%10 == 0)
         {
             LED_VERDE=!LED_VERDE;
-            encoderDxCounter=0;
         }
 
         
-        //__delay_ms(1000);
-        
-        /*Controlla se è passato il tempo della fine dell'impulso*/
+        if(counter_led>=10000)
+        {
+            LED_GIALLO=!LED_GIALLO;
+            counter_led=0;
+            encoderDxCurrentValue=encoderDxCounter;
+            encoderDxCounter=0;
+            lcd_put_uint(encoderDxCurrentValue, 0, 0);
+        }
+
+/*
+        //Controlla se ï¿½ passato il tempo della fine dell'impulso
         if(counter_led<10000)
         {
-            /*Resetta l'uscita che pilota il LED*/
+            //Resetta l'uscita che pilota il LED
             LED_GIALLO=1;
         }
-        /*Se sono passati 20mS*/
+        //Se sono passati 20mS
         if(counter_led>=10000 && counter_led < 20000)
         {
-            /*Setta l'uscita che pilota il LED*/
+            //Setta l'uscita che pilota il LED
             LED_GIALLO=0;
         }
         if(counter_led>=20000)
         {
             counter_led=0;
         }
+*/
     }
 }
 
