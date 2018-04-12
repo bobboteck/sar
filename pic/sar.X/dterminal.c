@@ -5,6 +5,7 @@
 #include <xc.h>         /* XC8 General Include File */
 #include <stdint.h>         /* For uint8_t definition */
 #include <stdbool.h>        /* For true/false definition */
+#include <stdlib.h>
 
 #include "dterminal.h"
 #include "system.h"
@@ -167,42 +168,49 @@ void lcd_put_uchar(unsigned char numero, unsigned char riga, unsigned char colon
 **************************************************************************/
 void lcd_put_uint(unsigned int numero, unsigned char riga, unsigned char colonna)
 {
-	/***** Posiziona il cursore *****/
-	lcd_pos_cur(riga,colonna);
+	char buffer[10];
 
-	/***** Estrazione decine di migliaia *****/
+	/***** Posiziona il cursore *****/
+	lcd_pos_cur(riga, colonna);
+
+	utoa(buffer, numero, 10);	//uint conv to buffer
+	lcd_puts(buffer);			//outputs to LCD
+
+/*
+	//***** Estrazione decine di migliaia *****
 	if((numero/10000)>0)
 		lcd_putch('0'+(numero/10000));
 	else
 		lcd_putch('0');
 	numero-=(numero/10000)*10000;
 
-	/***** Estrazione migliaia *****/
+	//***** Estrazione migliaia *****
 	if((numero/1000)>0)
 		lcd_putch('0'+(numero/1000));
 	else
 		lcd_putch('0');
 	numero-=(numero/1000)*1000;
 
-	/***** Estrazione centinaia *****/
+	//***** Estrazione centinaia *****
 	if((numero/100)>0)
 		lcd_putch('0'+(numero/100));
 	else
 		lcd_putch('0');
 	numero-=(numero/100)*100;
 	
-	/***** Estrazione decine *****/
+	//***** Estrazione decine *****
 	if((numero/10)>0)
 		lcd_putch('0'+(numero/10));
 	else
 		lcd_putch('0');
 	numero-=(numero/10)*10;
 
-	/***** Estrazione decine *****/
+	//***** Estrazione decine *****
 	if(numero!=0)
 		lcd_putch('0'+numero);
 	else
 		lcd_putch('0');
+*/
 }
 
 /**************************************************************************
