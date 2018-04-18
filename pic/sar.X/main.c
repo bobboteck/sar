@@ -28,14 +28,22 @@
 
 void main(void)
 {
-    unsigned int encoderDxCurrentValue=0;
+    unsigned char encoderDxCurrentValue=0;
 
     /* Configure the oscillator for the device */
     ConfigureOscillator();
     /* Initialize I/O and Peripherals for application */
     InitApp();
-    lcd_init();
+
     StartTimer0();
+
+    lcd_init();
+    lcd_clear();
+    lcd_home();
+    lcd_puts("SAR");
+    __delay_ms(1000);
+    lcd_put_uchar(255, 0, 4);
+    __delay_ms(1000);
     
     while(1)
     {
@@ -62,13 +70,15 @@ void main(void)
         
         if(counter_led>=10000)
         {
-            LED_GIALLO=!LED_GIALLO;
             counter_led=0;
+            LED_GIALLO=!LED_GIALLO;
+            TEST_OUT=!TEST_OUT;
             encoderDxCurrentValue=encoderDxCounter;
             encoderDxCounter=0;
-            lcd_put_uint(encoderDxCurrentValue, 0, 0);
         }
 
+        lcd_put_uchar(encoderDxCurrentValue, 0, 8);
+        
 /*
         //Controlla se � passato il tempo della fine dell'impulso
         if(counter_led<10000)

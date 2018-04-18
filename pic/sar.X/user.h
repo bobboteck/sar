@@ -25,6 +25,8 @@
 /* Encoder Destro collegato a RB4 */
 #define ENCODER_DX  PORTBbits.RB4
 
+#define TEST_OUT    LATCbits.LATC0
+
 #define TMR0_VALUE      241
 
 /******************************************************************************/
