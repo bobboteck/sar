@@ -132,30 +132,30 @@
 /******************************************************************************/
 
 /* Inizializza il display */
-void lcd_init(void);
+void LcdInit(void);
 /* Canella il display e posiziona il cursore alla posizione home */
-void lcd_clear(void);
+void LcdClear(void);
 /* Posiziona il cursore alla posizione home */
-void lcd_home(void);
+void LcdHome(void);
 /******************************************************************************
  * Posiziona il cursore alla riga e colonna indicata dai parametri
  *
  * @param row: indica la righa a cui posizionare il cursore (indice da 0)
  * @param col: indica la colonna a cui posizionare il	cursore (indice da 0)
 ******************************************************************************/
-void lcd_pos_cur(unsigned char row, unsigned char col);
+void LcdCursorPosition(unsigned char row, unsigned char col);
 /******************************************************************************
  * Scrive un carattere sul display
  *
  * @param c: carattere da visualizzare sul display
 ******************************************************************************/
-void lcd_putch(unsigned char c);
+void LcdPutch(unsigned char c);
 /******************************************************************************
  * Scrive una stringa di caratteri sul display
  *
  * @param s: stringa da visualizzare sul display
 ******************************************************************************/
-void lcd_puts(const char *s);
+void LcdPuts(const char *s);
 /******************************************************************************
  * Scrive sul display il numero passato come parametro, posizionandolo nella 
  * possizione indicata dagli altri due parametri
@@ -164,7 +164,7 @@ void lcd_puts(const char *s);
  * @param riga: indica la righa a cui posizionare il cursore (indice da 0)
  * @param colonna: indica la colonna a cui posizionare il cursore (indice da 0)
 ******************************************************************************/
-void lcd_put_uchar(unsigned char numero, unsigned char riga, unsigned char colonna);
+void LcdPutUChar(unsigned char number, unsigned char row, unsigned char col);
 /******************************************************************************
  * Scrive sul display il numero passato come parametro, posizionandolo nella 
  * possizione indicata dagli altri due parametri
@@ -173,6 +173,6 @@ void lcd_put_uchar(unsigned char numero, unsigned char riga, unsigned char colon
  * @param riga: indica la righa a cui posizionare il cursore (indice da 0)
  * @param colonna: indica la colonna a cui posizionare il cursore (indice da 0)
 ******************************************************************************/
-void lcd_put_uint(unsigned int numero, unsigned char riga, unsigned char colonna);
+void LcdPutUInt(unsigned int number, unsigned char row, unsigned char col);
 
 #endif	/* DTERMINAL_H */

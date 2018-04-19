@@ -24,42 +24,33 @@
 /******************************************************************************/
 /* Main Program                                                               */
 /******************************************************************************/
-
-
 void main(void)
 {
-    unsigned char encoderDxCurrentValue=0;
+    unsigned char encoderDxCurrentValue=0, encoderSxCurrentValue=0;
 
-    /* Configure the oscillator for the device */
+    // Configure the oscillator for the device
     ConfigureOscillator();
-    /* Initialize I/O and Peripherals for application */
+    // Initialize I/O and Peripherals for application
     InitApp();
-
+    // Start Timer0 running
     StartTimer0();
-
-    lcd_init();
-    lcd_clear();
-    lcd_home();
-    lcd_puts("SAR");
+    // Initialize LDC
+    LcdInit();
+    LcdClear();
+    LcdHome();
+    LcdPuts("SAR");
     __delay_ms(1000);
-    lcd_put_uchar(255, 0, 4);
+    LcdPutUChar(0, 0, 4);
+    LcdPutUChar(0, 0, 8);
     __delay_ms(1000);
     
     while(1)
     {
-        if(encoderSxCounter<=20)
+        // Il led rosso lampeggia ogni quarto di giro della ruota destra
+        if(encoderSxCounter%10 == 0)
         {
-            LED_ROSSO=0;
+            LED_ROSSO=!LED_ROSSO;
         }
-        if(encoderSxCounter>20 && encoderSxCounter<40)
-        {
-            LED_ROSSO=1;
-        }
-        if(encoderSxCounter>=40)
-        {
-            encoderSxCounter=0;
-        }
-        
         
         // Il led verde lampeggia ogni quarto di giro della ruota destra
         if(encoderDxCounter%10 == 0)
@@ -67,36 +58,19 @@ void main(void)
             LED_VERDE=!LED_VERDE;
         }
 
-        
-        if(counter_led>=10000)
+        // 
+        if(Timer0Counter>=10000)
         {
-            counter_led=0;
+            Timer0Counter=0;
             LED_GIALLO=!LED_GIALLO;
             TEST_OUT=!TEST_OUT;
             encoderDxCurrentValue=encoderDxCounter;
+            encoderSxCurrentValue=encoderSxCounter;
             encoderDxCounter=0;
+            encoderSxCounter=0;
         }
 
-        lcd_put_uchar(encoderDxCurrentValue, 0, 8);
-        
-/*
-        //Controlla se � passato il tempo della fine dell'impulso
-        if(counter_led<10000)
-        {
-            //Resetta l'uscita che pilota il LED
-            LED_GIALLO=1;
-        }
-        //Se sono passati 20mS
-        if(counter_led>=10000 && counter_led < 20000)
-        {
-            //Setta l'uscita che pilota il LED
-            LED_GIALLO=0;
-        }
-        if(counter_led>=20000)
-        {
-            counter_led=0;
-        }
-*/
+        LcdPutUChar(encoderDxCurrentValue, 0, 8);
+        LcdPutUChar(encoderDxCurrentValue, 0, 4);
     }
 }
-

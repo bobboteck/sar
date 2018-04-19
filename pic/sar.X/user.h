@@ -33,7 +33,7 @@
 /* User Function Prototypes                                                   */
 /******************************************************************************/
 
-unsigned int counter_led=0;
+unsigned int Timer0Counter=0;
 unsigned int encoderDxCounter=0;
 unsigned int encoderSxCounter=0;
 

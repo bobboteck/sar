@@ -3,12 +3,11 @@
 /******************************************************************************/
 #include <xc.h>         /* XC8 General Include File */
 #include "user.h"
-#include <stdbool.h>       /* For true/false definition */
+#include <stdbool.h>    /* For true/false definition */
 
 /******************************************************************************/
 /* Interrupt Routines                                                         */
 /******************************************************************************/
-//unsigned int counter_led=0;
 unsigned char prevEncoderDxValue=0;
 unsigned char prevEncoderSxValue=0;
 
@@ -17,7 +16,7 @@ void interrupt high_isr(void)
 {
     if(INTCONbits.TMR0IF==1)
     {
-        counter_led++;
+        Timer0Counter++;
         /*Reimposta il valore del Timer0 ed il Flag dell'interrupt*/
         TMR0L=(unsigned)TMR0_VALUE;
         INTCONbits.TMR0IF=0;

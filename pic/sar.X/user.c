@@ -60,7 +60,7 @@ void InitApp(void)
     PWMCON1 = 0b11110000; // 1:16 postscaler, updates abilitati, override asincrono
     DTCON = 0x00; // dead time 0ns
     // Output Override
-    OVDCOND = 0b00111111; // L'output è controllato dal DutyCycle e TimeBase
+    OVDCOND = 0b00111111; // L'output ï¿½ controllato dal DutyCycle e TimeBase
     OVDCONS = 0b00000000; // Tutti i pin sono INACTIVE quando in override
     // Fault Configuration
     FLTCONFIG = 0x00; // Fault A e B disabilitati
@@ -79,15 +79,15 @@ void InitApp(void)
     T0CONbits.TMR0ON=0;     // Timer0 OFF
 
     /* Configure the IPEN bit (1=on) in RCON to turn on/off int priorities */
-    RCONbits.IPEN=1;        // Abilità la priorita per gli interrupt
+    RCONbits.IPEN=1;        // Abilitï¿½ la priorita per gli interrupt
     INTCONbits.GIEH=0;      // Disabilita tutti gli Interrupt (High)
     INTCONbits.GIEL=0;      // Disabilita tutti gli Interrupt (Low)
     INTCONbits.TMR0IF=0;    // Resetta il Flag dell'int del Timer0, va resettato sempre a mano
 	PIR1bits.ADIF=0;		// Resetta il Flag dell'int del ADC, va resettato sempre a mano
     INTCONbits.RBIF=0;      // Resetta il Flag dell'int delle RB on change, va resettato sempre a mano
     
-    INTCON2bits.TMR0IP=1;   // L'int del Timer0 è definito di High priority
-    INTCON2bits.RBIP=1;     // L'int su RB è definito di High priority
+    INTCON2bits.TMR0IP=1;   // L'int del Timer0 ï¿½ definito di High priority
+    INTCON2bits.RBIP=1;     // L'int su RB ï¿½ definito di High priority
     
     IPR1bits.ADIP=0;        // Int ADC definito Low priority
 
@@ -101,6 +101,7 @@ void InitApp(void)
 
 void StartTimer0()
 {
+    Timer0Counter=0;
     TMR0L=TMR0_VALUE;       // Imposta il valore da assegnare al contatore del Timer0
     T0CONbits.TMR0ON=1;
 }
