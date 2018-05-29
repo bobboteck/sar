@@ -170,7 +170,7 @@ void LcdPutUChar(unsigned char number, unsigned char row, unsigned char col)
 void LcdPutUInt(unsigned int number, unsigned char row, unsigned char col)
 {
 	/***** Posiziona il cursore *****/
-	LcdCursorPosition(riga, colonna);
+	LcdCursorPosition(row, col);
 	//***** Estrazione decine di migliaia *****
 	unsigned int numeroDecineMigliaia=(unsigned int)number/10000;
 
@@ -183,7 +183,7 @@ void LcdPutUInt(unsigned int number, unsigned char row, unsigned char col)
 		LcdPutch('0');
 	}
 
-	numero-=numeroDecineMigliaia*10000;
+	number-=numeroDecineMigliaia*10000;
 	//***** Estrazione migliaia *****
 	unsigned int numeroMigliaia=(unsigned int)number/1000;
 
@@ -196,7 +196,7 @@ void LcdPutUInt(unsigned int number, unsigned char row, unsigned char col)
 		LcdPutch('0');
 	}
 
-	numero-=numeroMigliaia*1000;
+	number-=numeroMigliaia*1000;
 	/***** Estrazione centinaia *****/
     unsigned int numeroCentinaia=(unsigned int)number/100;
 	// Verifica se presente un numero per le centinaia da visualizzare
@@ -238,7 +238,7 @@ void LcdPutUInt(unsigned int number, unsigned char row, unsigned char col)
 *** Inizializza il display in modalita 4 bit il cursore � OFF, per	  	***
 *** attivare il cursore cambiare il commento				  			***
 **************************************************************************/
-void lcd_init(void)
+void LcdInit(void)
 {
     LCD_RS=0;//LCD_CMD;
     LCD_EN=0;
